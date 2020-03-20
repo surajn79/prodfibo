@@ -6,6 +6,7 @@ before_install:
 script:
     -  docker run -e CI=true surajn79/prodfibo npm run test -- --coverage    
 after_success:
+    -  docker pull nginx
     -  docker build -t surajn79/prod-client      ./client
     -  docker build -t surajn79/prod-nginx      ./nginx
     -  docker build -t surajn79/prod-api      ./api
