@@ -6,15 +6,14 @@ before_install:
 script:
     -  docker run -e CI=true surajn79/prodfibo npm run test -- --coverage    
 after_success:
-        -  docker build -t surajn79/prod-client      ./client
-        -  docker build -t surajn79/prod-nginx      ./nginx
-        -  docker build -t surajn79/prod-server      ./server
-        -  docker build -t surajn79/prod-worker      ./worker
-
+    -  docker build -t surajn79/prod-client      ./client
+    -  docker build -t surajn79/prod-nginx      ./nginx
+    -  docker build -t surajn79/prod-server      ./server
+    -  docker build -t surajn79/prod-worker      ./worker
     #Login to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     #Take those images and push them to docker hub
     - docker push surajn79/prod-client
     - docker push surajn79/prod-nginx
     - docker push surajn79/prod-server
-    - docker push surajn79/prod-worker    
+    - docker push surajn79/prod-worker
